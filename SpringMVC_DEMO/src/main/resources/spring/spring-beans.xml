@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                        http://www.springframework.org/schema/security
+                        http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!-- 对模型视图名称的解析，即在模型视图名称添加前后缀(如果最后一个还是表示文件夹,则最后的斜杠不要漏了) 使用JSP-->
+    <!-- 默认的视图解析器 在上边的解析错误时使用 (默认使用html)- -->
+    <bean id="defaultViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/views/"/><!--设置JSP文件的目录位置-->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- springmvc文件上传需要配置的节点-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="20971500"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="resolveLazily" value="true"/>
+        <property name="maxInMemorySize" value="40960"></property>
+    </bean>
+
+    <!-- 添加SpringMVC对json的支持 -->
+    <bean id="mappingJackson2HttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>application/json;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="springSecurityFilterChain"
+          class="org.springframework.security.web.FilterChainProxy">
+        <security:filter-chain-map request-matcher="ant">
+            <security:filter-chain pattern="/index.jsp**" filters="none" />
+            <security:filter-chain pattern="/index.html**" filters="none" />
+            <security:filter-chain pattern="/404.jsp**" filters="none" />
+            <security:filter-chain pattern="/500.jsp**" filters="none" />
+            <!--<security:filter-chain pattern="/chrome.zip**" filters="none" />-->
+            <!--<security:filter-chain pattern="/**" filters="menuFilter" />-->
+            <security:filter-chain pattern="/**" filters="none" />
+        </security:filter-chain-map>
+    </bean>
+
+    <!-- webToken 拦截 可用于检测重复提交-->
+    <bean id="webTokenInteceptor" class="com.tc.common.interceptor.WebTokenInteceptor"/>
+
+    <!-- 记录日志 -->
+    <bean id="webLogInteceptor" class="com.tc.common.interceptor.WebLogInteceptor" />
+
+    <!-- 覆盖原exception处理对象 -->
+    <bean id="exceptionHandler"
+          class="com.tc.common.interceptor.WebHandlerExceptionResolver" />
+
+    <bean id="restfulLogInteceptor" class="com.tc.common.interceptor.RestfulLogInteceptor" />
+</beans>

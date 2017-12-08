@@ -1,6 +1,7 @@
 package com.tc.controller;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/test")
 public class TestController {
     //添加一个日志器
-    private static final Logger logger = Logger.getLogger(TestController.class);
+    protected final Logger logger = LoggerFactory.getLogger(TestController.class);
 
     @RequestMapping("/index")
     public String test(){
