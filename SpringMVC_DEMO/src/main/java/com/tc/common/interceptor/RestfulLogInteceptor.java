@@ -17,7 +17,13 @@ public class RestfulLogInteceptor implements MethodBeforeAdvice, AfterReturningA
 	// 日志
 	protected final org.slf4j.Logger logger = LoggerFactory.getLogger(RestfulLogInteceptor.class.getCanonicalName());
 
-	private final String[] IPACKAGE = new String[] { "Request", "Session", "Response" };
+	private final String[] IPACKAGE = new String[] {
+			"Request",
+			"Session",
+			"Response",
+			"WebInput",
+			"WebOutput"
+	};
 
 	/**
 	 * 判断and添加对象日志

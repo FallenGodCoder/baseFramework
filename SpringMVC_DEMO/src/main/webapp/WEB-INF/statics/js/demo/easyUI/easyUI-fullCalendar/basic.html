@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Basic Combo - jQuery EasyUI Demo</title>
+        <style>
+            html,body,.full-expand{
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+        <script type="text/javascript" src="../../../plugins/core/jQuery/jquery-2.1.4.js"></script>
+        <script type="text/javascript" src="../../../plugins/easyloader.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                using(["easyUI-fullCalendar"],function(){
+                    $("#fullCalendar").fullCalendar();
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div id="fullCalendar"></div>
+    </body>
+</html>

@@ -41,6 +41,15 @@
         <property name="supportedMediaTypes">
             <list>
                 <value>application/json;charset=UTF-8</value>
+                <value>application/x-www-form-urlencoded; charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/plain;charset=UTF-8</value>
+                <value>text/html;charset=UTF-8</value>
             </list>
         </property>
     </bean>
@@ -58,11 +67,36 @@
         </security:filter-chain-map>
     </bean>
 
+    <!-- 通用拦截器bean -->
+    <bean id="genericInterceptor" class="com.tc.common.interceptor.GenericInterceptor" />
+
     <!-- webToken 拦截 可用于检测重复提交-->
     <bean id="webTokenInteceptor" class="com.tc.common.interceptor.WebTokenInteceptor"/>
 
     <!-- 记录日志 -->
     <bean id="webLogInteceptor" class="com.tc.common.interceptor.WebLogInteceptor" />
+
+    <!-- 针对WebInput和WebOutput定制的解析器 -->
+    <bean id="inOutHandlerMethodResolver" class="com.tc.common.resolver.InOutHandlerMethodResolver" />
+    <!-- 针对注解@FormModel定制的解析器 -->
+    <bean id="formModelMethodArgumentResolver" class="com.tc.common.resolver.FormModelMethodArgumentResolver" />
+
+    <!-- tiles视图解析器 -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="viewClass">
+            <value>org.springframework.web.servlet.view.tiles3.TilesView</value>
+        </property>
+        <property name="order" value="1" />
+    </bean>
+
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>classpath:tiles/tiles-template.xml</value>
+                <value>classpath:tiles/tiles-houtai.xml</value>
+            </list>
+        </property>
+    </bean>
 
     <!-- 覆盖原exception处理对象 -->
     <bean id="exceptionHandler"

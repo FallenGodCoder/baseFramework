@@ -15,7 +15,7 @@
     <!--本项目把静态资源放在了WEB-INF的statics目录下，资源映射如下-->
     <mvc:resources mapping="/css/**" location="/WEB-INF/statics/css/"/>
     <mvc:resources mapping="/js/**" location="/WEB-INF/statics/js/"/>
-    <mvc:resources mapping="/image/**" location="/WEB-INF/statics/image/"/>
+    <mvc:resources mapping="/img/**" location="/WEB-INF/statics/img/"/>
 
     <!--
         但是项目部署到linux下发现WEB-INF的静态资源会出现无法解析的情况，但是本地tomcat访问正常，因此建议还是直接把静
@@ -32,14 +32,24 @@
     <!-- 配置注解驱动 可以将request参数与绑定到controller参数上 -->
     <!-- 视图解析器 -->
     <mvc:annotation-driven>
+        <mvc:argument-resolvers>
+            <ref bean="inOutHandlerMethodResolver" />
+            <ref bean="formModelMethodArgumentResolver" />
+        </mvc:argument-resolvers>
         <mvc:message-converters>
+            <!-- 消息转换器 对消息编码转换UTF-8 -->
+            <ref bean="stringHttpMessageConverter"/>
             <!-- 增加对json的支持 -->
             <ref bean="mappingJackson2HttpMessageConverter"/>
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-
     <mvc:interceptors>
+        <!-- 通用拦截器 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <ref bean="genericInterceptor"/>
+        </mvc:interceptor>
         <!-- 配置拦截器，实现防重复提交 -->
         <mvc:interceptor>
             <mvc:mapping path="/**" />

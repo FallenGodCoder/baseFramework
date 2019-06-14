@@ -1,0 +1,13 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+    "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition name="*.*.flaty.houtai" extends="im.flaty.main.page">
+        <put-attribute name="body" value="/WEB-INF/views/houtai/{1}/{2}.jsp"></put-attribute>
+        <put-attribute name="js" value="/WEB-INF/views/houtai/{1}/{2}_js.jsp"></put-attribute>
+    </definition>
+    <definition name="*.*.houtai" extends="main.im.template">
+        <put-attribute name="body" value="/WEB-INF/views/houtai/{1}/{2}.jsp"></put-attribute>
+        <put-attribute name="js" value="/WEB-INF/views/houtai/{1}/{2}_js.jsp"></put-attribute>
+    </definition>
+</tiles-definitions>

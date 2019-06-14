@@ -1,0 +1,16 @@
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition name="main.template" template="/WEB-INF/views/common/template/main/main.jsp">
+    </definition>
+    <definition name="main.im.template" extends="main.template">
+        <put-attribute name="head" value="/WEB-INF/views/common/template/main/head.jsp"></put-attribute>
+    </definition>
+
+    <!--这个用来flaty界面的-->
+    <definition name="im.flaty.main.page" template="/WEB-INF/views/common/template/main/flatyMain.jsp">
+        <put-attribute name="flatyHead" value="/WEB-INF/views/common/template/main/flatyHead.jsp"></put-attribute>
+        <put-attribute name="flatyHeadJS" value="/WEB-INF/views/common/template/main/flatyHead_js.jsp"></put-attribute>
+    </definition>
+</tiles-definitions>
