@@ -70,7 +70,7 @@
         <dependency>
             <groupId>org.apache.ant</groupId>
             <artifactId>ant</artifactId>
-            <version>1.10.1</version>
+            <version>1.10.9</version>
         </dependency>
 
         <!--j2ee相关包 servlet、jsp、jstl-->
